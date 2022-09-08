@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.6.0.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .shop img{
+            width: 200px;
+        }
+        .shop .atext{
+            width: 30px;
+        }
+        .shop .add a{
+            text-decoration: none;;
+            border: 1px solid black;
+            display: inline-block;
+            padding: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="shop">
+        <table border="1px">
+            <tr>
+                <th></th>
+                <th>商品图片</th>
+                <th>数量</th>
+                <th>单价</th>
+                <th>总价</th>
+            </tr>
+            <!-- 第一行 -->
+            <tr>
+                <td>
+                    <input type="checkbox" name="" id="" class="ton">
+                </td>
+                <td>
+                    <img src="26.png" alt="" srcset="">
+                </td>
+                <td class="add">
+                    <p>
+                        <a href="#" class="adde">-</a>
+                        <input type="text" value="1" class="atext">
+                        <a href="#" class="addj">+</a>
+                    </p>
+                </td>
+                <td class="pr">
+                    <p>
+                        ￥
+                        <span class="price">12.3</span>
+                    </p>
+                </td>
+                <td class="priceSum">
+                    <p>
+                        ￥
+                        <span class="zj">12.3</span>
+                    </p>
+                </td>
+            </tr>
+            <!-- 第二行 -->
+            <tr>
+                <td>
+                    <input type="checkbox" name="" id="" class="ton">
+                </td>
+                <td>
+                    <img src="26.png" alt="" srcset="">
+                </td>
+                <td class="add">
+                    <p>
+                        <a href="#" class="adde">-</a>
+                        <input type="text" value="1" class="atext">
+                        <a href="#" class="addj">+</a>
+                    </p>
+                </td>
+                <td class="pr">
+                    <p>
+                        ￥
+                        <span class="price">12.3</span>
+                    </p>
+                </td>
+                <td class="priceSum">
+                    <p>
+                        ￥
+                        <span class="zj">12.3</span>
+                    </p>
+                </td>
+            </tr>
+            <!-- 第三行 -->
+            <tr>
+                <td>
+                    <input type="checkbox" name="" id="" class="ton">
+                </td>
+                <td>
+                    <img src="26.png" alt="" srcset="">
+                </td>
+                <td class="add">
+                    <p>
+                        <a href="#" class="adde">-</a>
+                        <input type="text" value="1" class="atext">
+                        <a href="#" class="addj">+</a>
+                    </p>
+                </td>
+                <td class="pr">
+                    <p>
+                        ￥
+                        <span class="price">12.3</span>
+                    </p>
+                </td>
+                <td class="priceSum">
+                    <p>
+                        ￥
+                        <span class="zj">12.3</span>
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <input type="checkbox" id="q">全选
+    </div>
+    
+    <script>
+        $('#q').click(function(){
+            // $(this).prop('checked')
+            $('.ton').prop('checked',$(this).prop('checked'))
+        })
+        $('.ton').click(function(){
+            if($('.ton:checked').length == $('.ton').length){
+                $('#q').prop('checked',true)
+            }else{
+                $('#q').prop('checked',false)
+            }
+        })
+
+        // 购物车 + 功能
+
+        $('.addj').click(function(){
+            var a = $(this).siblings('.atext').val();
+            a++; 
+            $(this).siblings('.atext').val(a)
+            // 商品价格计算
+            var price = $(this).parent().parent().siblings('.pr').find('.price').text();
+            $(this).parent().parent().siblings('.priceSum').find('.zj').text(price * a)
+        })
+
+        // 购物车 - 功能
+        $('.adde').click(function(){
+            var a =  $(this).siblings('.atext').val();
+            if(a-- == 0){
+                return false
+            } 
+            $(this).siblings('.atext').val(a);
+            // 商品价格计算
+            var price = $(this).parent().parent().siblings('.pr').find('.price').text();
+            $(this).parent().parent().siblings('.priceSum').find('.zj').text(price * a);
+        })
+
+        $('.atext').change(function(){
+            //商品的改变个数
+            var a =$(this).val();
+            // 商品的价格
+            var price = $(this).parent().parent().siblings('.pr').find('.price').text();
+            // 总价
+            $(this).parent().parent().siblings('.priceSum').find('.zj').text(a * price);
+        })
+    </script>
+</body>
+</html>
